@@ -27,3 +27,10 @@ class ConexionManager:
             cursor.execute(query)
             datos = cursor.fetchall()
             return datos
+    def updatedCalendar(self, id, calendario):
+        with ConexionFactory() as con:
+            cursor, conexion = con
+            query = "UPDATE personas SET calendario = %s WHERE id = %s"
+            cursor.execute(query, (calendario, id))
+            conexion.commit()
+            print("Datos actualizados")

@@ -5,14 +5,12 @@ class EncuestaDiabetico():
 
     def __init__(self,page: ft.Page,navbar):
         self.page = page
+        self.id = None
         self.navBar = navbar
-        self.cuestions = Cuestions(page)
 
-    
-   
-  
-    def getEncuestaDiabeticoView(self):
-
+    def getEncuestaDiabeticoView(self, id):
+        self.id = id
+        self.cuestions = Cuestions(self.page, self.id)
         login = ft.Column(controls=[
             ft.Container(content=self.cuestions.getCuestion(),
             padding=20,

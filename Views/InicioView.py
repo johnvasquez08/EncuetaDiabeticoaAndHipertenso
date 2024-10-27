@@ -26,24 +26,23 @@ class InicioView():
         )
 
         self.registroView = RegisterView(page)
-        self.encuestaDiabetico = EncuestaDiabetico(page,self.navBar).getEncuestaDiabeticoView()
+        self.encuestaDiabetico = EncuestaDiabetico(page,self.navBar)
         self.encuestaHipertenso = EncuestaHipertenso(page,self.navBar).getEncuestaHipertensoView()
-        self.visualizar = ViewVisualizar(page,self.navBar)
+        self.visualizar = ViewVisualizar(page,self.navBar).getViewVisualizar()
         self.data = None
 
     
     
     def navigate(self,destination: ft.ControlEvent):
-  
         if destination.data == "0" and (self.data == 'Diabetico'):
             self.page.views.pop()
-            self.page.views.append(self.encuestaDiabetico)
+            self.page.views.append(self.encuestaDiabetico.getEncuestaDiabeticoView(self.id))
         elif destination.data == "0" and (self.data == 'Hipertenso'):
             self.page.views.pop()
             self.page.views.append(self.encuestaHipertenso)
         if destination.data == "1":
             self.page.views.pop()
-            self.page.views.append(self.visualizar.getViewVisualizar())
+            self.page.views.append(self.visualizar)
         self.page.update()
     def getNavigation_bar(self):
         return ft.NavigationBar(
@@ -65,7 +64,8 @@ class InicioView():
         self.page.update()
     def iniciarSesion(self,e):
         condi,data = ConexionManager().verificarUsuario(self.username.value,self.password.value)
-        self.data=data[0][-1]
+        self.data=data[0][-2]
+        self.id=data[0][0]
         if(condi):
             print(data)
             self.page.views.pop()
@@ -73,7 +73,7 @@ class InicioView():
                 self.page.views.append(self.encuestaHipertenso)
             
             elif(self.data == 'Diabetico'):
-                self.page.views.append(self.encuestaDiabetico)
+                self.page.views.append(self.encuestaDiabetico.getEncuestaDiabeticoView(self.id))
             
             else:
                 pass
