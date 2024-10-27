@@ -1,10 +1,14 @@
 import flet as ft
 import json
+from DAO.Factory.ConexionManager import ConexionManager
+
 
 class Cuestions():
 
-    def __init__(self, page:ft.Page):
+    def __init__(self, page:ft.Page, id):
+        self.id = id
         self.page = page
+        self.conexion = ConexionManager()
         self.title = ft.Text(
             value="Encuesta Diabeticos",
             style=ft.TextThemeStyle.HEADLINE_MEDIUM,
@@ -58,7 +62,7 @@ class Cuestions():
             #33
             ft.Radio(value="Seleccione", label="Seleccione",visible=False),
             ]
-        
+        self.calendarioupdated = ''
         self.combinaciones = {
             ('Si', 'Tipo 1', 'Si2', 'Insulina'): "Estas manejando adecuadamente, pero se recomienda un monitoreo constante",
             ('Si', 'Tipo 1', 'Si2', 'Medicamentos orales'): "Estas manejando adecuadamente, pero se recomienda un monitoreo constante",
@@ -367,6 +371,7 @@ class Cuestions():
                     
                 else:
                     self.pregunta.value = f"{self.recomendacion}\nCalendario recomendado:\n{self.SaveVar}"
+                    self.conexion.updatedCalendar(self.id, self.calendarioupdated)
                     self.recomendacion=""
                     self.SaveVar=""
                     self.calendario=""
@@ -387,24 +392,34 @@ class Cuestions():
                 print("se convirtio?",self.verificar)
                 if self.verificar == self.listedanswers[0] or self.verificar == self.listedanswers[1] :
                     self.calendario = (self.Recomendaciones.get('calendario1'))
+                    self.calendarioupdated = "calendario1"
                 elif self.verificar == self.listedanswers[2] or self.verificar == self.listedanswers[3] :
                     self.calendario = (self.Recomendaciones.get('calendario2'))
+                    self.calendarioupdated = "calendario2"
                 elif self.verificar == self.listedanswers[4] or self.verificar == self.listedanswers[5] :
                     self.calendario = (self.Recomendaciones.get('calendario3'))
+                    self.calendarioupdated = "calendario3"
                 elif self.verificar == self.listedanswers[6] or self.verificar == self.listedanswers[7] :
                     self.calendario = (self.Recomendaciones.get('calendario4'))
+                    self.calendarioupdated = "calendario4"
                 elif self.verificar == self.listedanswers[8] or self.verificar == self.listedanswers[9] :
                     self.calendario = (self.Recomendaciones.get('calendario5'))
+                    self.calendarioupdated = "calendario5"
                 elif self.verificar == self.listedanswers[10] or self.verificar == self.listedanswers[11] :
                     self.calendario = (self.Recomendaciones.get('calendario6'))
+                    self.calendarioupdated = "calendario6"
                 elif self.verificar == self.listedanswers[12] or self.verificar == self.listedanswers[13] :
                     self.calendario = (self.Recomendaciones.get('calendario7'))
+                    self.calendarioupdated = "calendario7"
                 elif self.verificar == self.listedanswers[14] or self.verificar == self.listedanswers[15] :
                     self.calendario = (self.Recomendaciones.get('calendario8'))
+                    self.calendarioupdated = "calendario8"
                 elif self.verificar == self.listedanswers[16] or self.verificar == self.listedanswers[17] :
                     self.calendario = (self.Recomendaciones.get('calendario9'))
+                    self.calendarioupdated = "calendario9"
                 elif self.verificar == self.listedanswers[18] or self.verificar == self.listedanswers[19] :
                     self.calendario = self.Recomendaciones.get('calendario10')
+                    self.calendarioupdated = "calendario10"
                 
                 if self.verificar == tuple(self.Respuestas):
                     for dia, actividades_dia in self.calendario.items():

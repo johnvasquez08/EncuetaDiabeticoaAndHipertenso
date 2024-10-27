@@ -12,6 +12,8 @@ class ViewVisualizar():
             ft.DataColumn(ft.Text("Apellido")),
             ft.DataColumn(ft.Text("username"),),
             ft.DataColumn(ft.Text("Condicion"),),
+            ft.DataColumn(ft.Text("Calendario"),),
+
         ],
         rows=[],
         )
@@ -29,6 +31,8 @@ class ViewVisualizar():
                             ft.DataCell(ft.Text(str(x[2]))),
                             ft.DataCell(ft.Text(str(x[3]))),
                             ft.DataCell(ft.Text(str(x[5]))),
+                            ft.DataCell(ft.Text(str(x[6]))),
+
                             
                             
                         ],) 
