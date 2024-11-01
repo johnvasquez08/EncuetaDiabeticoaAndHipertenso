@@ -34,11 +34,12 @@ class ConexionManager:
             cursor.execute(query, (calendario, id))
             conexion.commit()
             print("Datos actualizados")
-    def getCalendario(self, id):
+    def getCalendario(id):
         with ConexionFactory() as con:
             cursor, conexion = con
             query = "SELECT calendario FROM personas WHERE id = %s"
             cursor.execute(query, (id,))
+            print(id)
             result = cursor.fetchone()
             if result:
                 print(id)

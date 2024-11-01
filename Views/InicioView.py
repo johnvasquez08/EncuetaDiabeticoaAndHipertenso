@@ -30,7 +30,7 @@ class InicioView():
         self.encuestaDiabetico = EncuestaDiabetico(page,self.navBar)
         self.encuestaHipertenso = EncuestaHipertenso(page,self.navBar).getEncuestaHipertensoView()
         self.visualizar = ViewVisualizar(page,self.navBar).getViewVisualizar()
-        self.calendario = ViewCalendario(page,self.navBar).get_view_calendario()
+        self.calendario = ViewCalendario(page,self.navBar)
         self.data = None
 
     
@@ -47,7 +47,7 @@ class InicioView():
             self.page.views.append(self.visualizar)
         if destination.data == "2":
             self.page.views.pop()
-            self.page.views.append(self.calendario)
+            self.page.views.append(self.calendario.get_view_calendario(self.id))
         self.page.update()
     def getNavigation_bar(self):
         return ft.NavigationBar(
@@ -86,6 +86,8 @@ class InicioView():
             self.page.update()
         else:
             print("usted no se encuetra registrado")
+    
+        
 
 
     def getInicioView(self):
