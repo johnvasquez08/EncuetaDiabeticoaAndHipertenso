@@ -4,6 +4,7 @@ from Views.Diabetico.EncuestaDiabeticoView import EncuestaDiabetico
 from Views.Hipertenso.EncuestaHipertensoView import EncuestaHipertenso
 from DAO.Factory.ConexionManager import ConexionManager
 from Views.VisualizarView import ViewVisualizar
+from Views.CalendarioView import ViewCalendario
 class InicioView():
     def __init__(self,page: ft.Page,):
         self.page = page
@@ -29,6 +30,7 @@ class InicioView():
         self.encuestaDiabetico = EncuestaDiabetico(page,self.navBar)
         self.encuestaHipertenso = EncuestaHipertenso(page,self.navBar).getEncuestaHipertensoView()
         self.visualizar = ViewVisualizar(page,self.navBar).getViewVisualizar()
+        self.calendario = ViewCalendario(page,self.navBar).get_view_calendario()
         self.data = None
 
     
@@ -43,6 +45,9 @@ class InicioView():
         if destination.data == "1":
             self.page.views.pop()
             self.page.views.append(self.visualizar)
+        if destination.data == "2":
+            self.page.views.pop()
+            self.page.views.append(self.calendario)
         self.page.update()
     def getNavigation_bar(self):
         return ft.NavigationBar(
@@ -52,7 +57,7 @@ class InicioView():
             ft.NavigationDestination(icon=ft.icons.BACKUP_TABLE_ROUNDED, label="Datos", data="1"),
             ft.NavigationDestination(
                 icon=ft.icons.BOOKMARK_BORDER,
-                label="Inicio",
+                label="Calendario",
                 data="2"
             ),
         ],
