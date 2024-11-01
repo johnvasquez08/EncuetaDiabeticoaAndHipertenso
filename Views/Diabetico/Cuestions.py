@@ -338,10 +338,13 @@ class Cuestions():
                     actividades_str = ', '.join(actividades_dia)
                     self.resultados += f"{dia}: {actividades_str}\n"  # Agregar el resultado al string
                     self.SaveVar = self.resultados
+                self.calendarioupdated = "calendario10"
+                self.conexion.updatedCalendar(self.id, self.calendarioupdated)
                 self.pregunta.value = f"Es urgente empezar tu tratamiento para manejar tu diabetes\nCalendario recomendado:\n{self.SaveVar}"
                 self.recomendacion=""
                 self.SaveVar=""
                 self.calendario=""
+                self.calendarioupdated=""
                  # Comentado: self.pregunta.value = "Click en el botón"
         # self.radios[32].visible = True
                 
@@ -364,10 +367,13 @@ class Cuestions():
                         actividades_str = ', '.join(actividades_dia)
                         self.resultados += f"{dia}: {actividades_str}\n"  # Agregar el resultado al string
                         self.SaveVar = self.resultados
+                    self.calendarioupdated = "calendario10"
+                    self.conexion.updatedCalendar(self.id, self.calendarioupdated)
                     self.pregunta.value = f"Es recomendable un chequeo y consulta medica para determinar el estado de tu salud\nCalendario recomendado:\n{self.SaveVar}"
                     self.recomendacion=""
                     self.SaveVar=""
                     self.calendario=""
+                    self.calendarioupdated=""
                     
                 else:
                     self.pregunta.value = f"{self.recomendacion}\nCalendario recomendado:\n{self.SaveVar}"

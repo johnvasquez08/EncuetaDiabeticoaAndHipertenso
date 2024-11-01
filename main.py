@@ -19,4 +19,4 @@ async def main(page: ft.Page):
     page.views.append(ventanda.getInicioView())
     await page.update_async()
 
-ft.app(target=main, view=ft.AppView.FLET_APP)
+ft.app(target=main, view=ft.AppView.WEB_BROWSER)
